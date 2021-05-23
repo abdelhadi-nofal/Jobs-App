@@ -11,12 +11,14 @@
     <p>Company : <%=element.company %></p>
     <p>Location : <%=element.location %></p>
     <p>Url : <%=element.url %></p>
+    <p>description : <%=element.description %></p>
 
     <form action="/update/<%=element.id  %>?_method=PUT " method="POST">
       <input name="title" value="<%=element.title  %> " />
       <input company="company" value="<%=element.company  %> " />
       <input name="location" value="<%=element.location  %> " />
       <input name="url" value="<%=element.url  %> " />
+      <input name="description" value="<%=element.description  %> " />
 
       <button type="submit">UPDATE</button>
     </form>

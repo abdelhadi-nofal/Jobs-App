@@ -25,6 +25,7 @@ function Jobs(data) {
   this.company = data.company;
   this.location = data.location;
   this.url = data.url;
+  this.description = data.description;
 }
 
 server.get("/", homeHandler);
@@ -66,9 +67,15 @@ function searchHandler(req, res) {
 }
 
 function addHandler(req, res) {
-  let SQL = `INSERT INTO jobstable (title,company,location,url)
-    VALUES($1,$2,$3,$4) ;`;
-  values = [req.body.title, req.body.company, req.body.location, req.body.url];
+  let SQL = `INSERT INTO jobstable (title,company,location,url,description)
+    VALUES($1,$2,$3,$4,$5) ;`;
+  values = [
+    req.body.title,
+    req.body.company,
+    req.body.location,
+    req.body.url,
+    req.body.description,
+  ];
 
   client.query(SQL, values).then(() => {
     res.redirect("/show");
@@ -94,13 +101,14 @@ function detailHandler(req, res) {
 }
 
 function updateHandler(req, res) {
-  let SQL = `UPDATE jobstable SET title=$1,company=$2,location=$3,url=$4 WHERE id=$5;`;
+  let SQL = `UPDATE jobstable SET title=$1,company=$2,location=$3,url=$4,description=$5 WHERE id=$6;`;
   let id = req.params.id;
   let savevalues = [
     req.body.title,
     req.body.company,
     req.body.location,
     req.body.url,
+    req.body.description,
     req.params.id,
   ];
 
